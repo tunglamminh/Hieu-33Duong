@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hieu &amp; Duong</title>
+  <title>Hiếu Yêuamp; Dương</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Patrick+Hand&display=swap" rel="stylesheet">
@@ -42,7 +42,6 @@
       display: flex; flex-direction: column; align-items: center; text-align: center;
     }
 
-    /* ---------- Tiêu đề ---------- */
     .year { margin: 0; font-weight: 300; font-size: 1rem; letter-spacing: .5em; text-indent: .5em; color: var(--muted); }
     .names {
       margin: .15em 0 0;
@@ -55,7 +54,6 @@
     .tagline { margin: .4em 0 0; font-weight: 300; font-size: 1.05rem; letter-spacing: .45em; text-indent: .45em; color: var(--blush); }
     .tagline .heart { color: var(--rose); letter-spacing: 0; }
 
-    /* ---------- Ảnh + trái tim hạt ---------- */
     .stage { position: relative; width: min(80vw, 380px); aspect-ratio: 1; margin: clamp(14px, 3vh, 30px) 0 6px; }
     #heart { position: absolute; inset: 0; width: 100%; height: 100%; }
     .photo {
@@ -69,7 +67,6 @@
     .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .photo .fallback { position: absolute; inset: 0; display: grid; place-items: center; font-size: 3rem; color: var(--rose); }
 
-    /* ---------- Nút ---------- */
     .btn {
       font: inherit; font-weight: 500; font-size: .98rem;
       border-radius: 999px; padding: .8em 1.6em; cursor: pointer;
@@ -87,7 +84,6 @@
     .link-btn { background: none; border: 0; padding: .2em .4em; font: inherit; font-size: .85rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
     .link-btn:hover { color: var(--blush); }
 
-    /* ---------- Giấy nhớ (sticky note) ---------- */
     .sticky {
       position: relative; width: 100%; padding: 28px 22px 14px;
       border-radius: 3px 3px 16px 3px; text-align: left;
@@ -119,7 +115,6 @@
     .reply { margin: 0; max-width: 400px; font-size: .98rem; line-height: 1.6; color: var(--blush); }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    /* ---------- Note trái tim cố định (chỉ đọc) ---------- */
     .love-note {
       position: relative; width: 100%; max-width: 400px; margin-top: 26px; padding: 32px 26px 20px;
       border-radius: 6px 6px 24px 6px; text-align: center; cursor: default;
@@ -142,7 +137,6 @@
     .love-text { margin: 0; font-size: 1.4rem; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
     .love-sign { margin: 12px 0 0; font-size: 1.15rem; color: #8a2f5c; }
 
-    /* ---------- Popup mở đầu ---------- */
     dialog {
       width: min(92vw, 440px); max-height: 96vh; padding: 16px; border: 0;
       background: transparent; color: var(--text); overflow-x: hidden; overflow-y: auto;
@@ -156,7 +150,6 @@
     .intro-body { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; padding-top: 10px; }
     .intro-body h2 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: clamp(1.9rem, 7vw, 2.5rem); text-shadow: 0 0 24px rgba(255, 92, 147, .5); }
 
-    /* ---------- Toast + tim bay ---------- */
     #toast {
       position: fixed; left: 50%; bottom: 26px; z-index: 50;
       transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
@@ -238,14 +231,11 @@
   (() => {
     "use strict";
 
-    /* =====================================================
-       ✏️ CHỈNH SỬA Ở ĐÂY — đổi chữ, ảnh, câu hỏi tại đây
-       ===================================================== */
     const CONFIG = {
       year: "2026",
-      names: "Hiếu & Dương",
+      names: "Hiếu Yêu Dương",
       tagline: "Love ❤ You",
-      photo: "EDIT_ME.png",            // đường dẫn ảnh (đặt cùng thư mục với index.html)
+      photo: "EDIT_ME.png",
       footer: "Vắt cực khô trí não dành cho m <3",
 
       question: "T thích m,thấy m bị đối xử tệ,t đau lòng lắm,về đấy làm người yêu  t nhé... ",
@@ -253,15 +243,13 @@
       noText: "Không đồng ý",
       yesReply: "T thích m..",
       noReply: "T rất mong được có cơ hội có m",
-      noRunsAway: true,               // Nút "Không đồng ý" tự chạy trốn khi di chuột vào
+      noRunsAway: true,
 
-      // 💌 Lời nhắn cố định
       loveNote: {
         text: "T thích m,đồng í làm ngyeu t nhé?",
         sign: "— Đỗ Trung Hiếu <3 Dương"
       }
     };
-    /* ===================================================== */
 
     const $ = (s) => document.querySelector(s);
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -273,11 +261,10 @@
       },
       set(key, value) {
         try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-        catch (e) { return false; }
+        catch (e) { return fallback; }
       }
     };
 
-    /* ---------- Đổ chữ vào trang ---------- */
     $("#year").textContent = CONFIG.year;
     $("#names").textContent = CONFIG.names;
     $("#tagline").textContent = CONFIG.tagline;
@@ -288,7 +275,6 @@
     $("#loveText").textContent = CONFIG.loveNote.text;
     $("#loveSign").textContent = CONFIG.loveNote.sign;
     
-    // Gán nội dung cố định vào ô giấy nhớ phía dưới
     $("#pageNote").value = CONFIG.loveNote.text;
     $("#pageSign").textContent = CONFIG.loveNote.sign;
 
@@ -299,7 +285,6 @@
     photo.addEventListener("error", () => { photo.hidden = true; $("#photoFallback").hidden = false; });
     photo.src = CONFIG.photo;
 
-    /* ---------- Toast ---------- */
     const toast = $("#toast");
     let toastTimer;
     function showToast(text) {
@@ -309,7 +294,6 @@
       toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
     }
 
-    /* ---------- Bầu trời sao ---------- */
     const sky = $("#sky"), sctx = sky.getContext("2d");
     let W, H, DPR, stars = [], shoots = [];
 
@@ -350,7 +334,6 @@
       }
     }
 
-    /* ---------- Trái tim bằng hạt sáng ---------- */
     const hc = $("#heart"), hctx = hc.getContext("2d");
     let HS = 0;
     const particles = Array.from({ length: 360 }, () => ({
@@ -394,7 +377,6 @@
     function loop(time) { drawSky(); drawHeart(time); requestAnimationFrame(loop); }
     requestAnimationFrame(loop);
 
-    /* ---------- Popup mở đầu ---------- */
     const ANS_KEY = "lm.answer";
     const intro = $("#intro"), yesBtn = $("#yesBtn"), noBtn = $("#noBtn");
     const pageReply = $("#pageReply");
@@ -406,7 +388,7 @@
     }
 
     function openIntro() {
-      document.body.style.overflow = "hidden";       // khoá cuộn trang phía sau
+      document.body.style.overflow = "hidden";
       intro.showModal();
     }
     intro.addEventListener("close", () => { document.body.style.overflow = ""; });
@@ -447,7 +429,6 @@
       noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); }, { passive: false });
     }
 
-    /* Mở popup ngay khi vào trang */
     renderAnswer();
     openIntro();
   })();
